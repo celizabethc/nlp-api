@@ -1,0 +1,19 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red83\green83\blue83;\red255\green255\blue82;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs24 \cf2 \cb3 SELECT  SUBSTRING_INDEX(\
+            SUBSTRING_INDEX(\
+                GROUP_CONCAT(              \
+                    f.diff\
+                    ORDER BY f.diff\
+                    SEPARATOR ','\
+                )\
+            ,   ','                           -- 2) cut at the comma\
+            ,   90/100 * COUNT(*) + 1),',',-1) AS `90th Percentile`\
+FROM \
+(select num1 - num2 as diff from uber) AS f;\
+}
